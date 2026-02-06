@@ -25,5 +25,18 @@ pipeline {
         }
       }
     }
+
+    stage('Pull and run') {
+      steps {
+        script {
+          withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
+            sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
+            sh 'docker pull $DH_USER/mock-api:latest'
+            sh 'docker rm -f mock-api-container || true'
+            sh 'docker run -d --name mock-api-container -p 8000:8000 $DH_USER/mock-api:latest'
+          }
+        }
+      }
+    }
   }
 }
