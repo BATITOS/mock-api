@@ -4,7 +4,7 @@ pipeline {
     stages{
         stage('Build Docker Image'){
             steps{
-                sh 'docker build -t mock-api:latest .'
+                sh '/usr/local/bin/docker build -t mock-api:latest .'
             }
         }
     }
