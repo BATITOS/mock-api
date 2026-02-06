@@ -9,7 +9,9 @@ pipeline {
         }
 
         stage('Run Pytest'){
-            sh 'docker run --rm mock-api:latest python -m pytest -q'
+            steps{
+                sh 'docker run --rm mock-api:latest python -m pytest -q'
+            }
         }
     }
 }
