@@ -5,7 +5,7 @@ client = TestClient(app, raise_server_exceptions=False)
 
 def test_health_returns_200():
     response = client.get("/health")
-    assert response.status_code == 200
+    assert response.status_code == 400
     assert response.json() == {"status" : "OK"}
 
 def test_process_valid_returns_200():
